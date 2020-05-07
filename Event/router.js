@@ -33,14 +33,8 @@ router.get("/events/:eventID", (req, res) => {
   }).then((event) => res.send(event));
 });
 
-router.post("/events", auth, (req, res, next) => {
-  const auth = req.headers.authorization.split(" ");
-  const jwt = auth[1];
-  const data = toData(jwt);
-
-  console.log("data.userId:", data.userId);
+router.post("/events", (req, res, next) => {
   Event.create({
-    userId: data.userId,
     ...req.body,
   })
     .then((data) => res.send(data))
