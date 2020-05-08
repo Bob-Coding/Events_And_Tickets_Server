@@ -2,7 +2,7 @@ const { Router } = require("express");
 const { toJWT, toData } = require("./jwt");
 const auth = require("./middleware");
 const router = new Router();
-const User = require("../user/model");
+const User = require("../User/model");
 const bcrypt = require("bcrypt");
 
 router.post("/signup", (req, res, next) => {
