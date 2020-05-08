@@ -1,7 +1,7 @@
 const User = require("../User/model");
 const Ticket = require("./model");
 const Event = require("../Event/model");
-const auth = require("../auth/middleware");
+const auth = require("../Auth/middleware");
 const { toData } = require("../Auth/jwt");
 const { Router } = require("express");
 
