@@ -22,7 +22,7 @@ const Event = db.define(
     },
     endDate: {
       type: Sequelize.STRING,
-      allownull: false,
+      allowNull: false,
     },
   },
   {

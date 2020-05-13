@@ -19,7 +19,11 @@ router.post("/signup", (req, res, next) => {
     } else {
       User.create(user)
         .then((user) =>
-          res.send({ userId: user.id, jwt: toJWT({ userId: user.id }) })
+          res.send({
+            userId: user.id,
+            jwt: toJWT({ userId: user.id }),
+            expiresIn: 1800,
+          })
         )
         .catch((error) => next(error));
     }
@@ -49,6 +53,7 @@ router.post("/login", (request, response, next) => {
           response.send({
             userId: entity.id,
             jwt: toJWT({ userId: entity.id }),
+            expiresIn: 1800,
           });
         } else {
           response.status(400).send({
