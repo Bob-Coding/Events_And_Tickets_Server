@@ -33,8 +33,9 @@ router.get("/events/:eventID", (req, res) => {
 });
 
 router.post("/events", (req, res, next) => {
+  console.log(req.body);
   Event.create({
-    ...req.body,
+    ...req.body.eventData,
   })
     .then((data) => res.send(data))
     .catch((error) => next(error));
