@@ -44,7 +44,7 @@ router.get("/tickets/:ticketID", (req, res) => {
   }).then((ticket) => res.send(ticket[0]));
 });
 
-router.post("/tickets", auth, (req, res, next) => {
+router.post("/tickets", (req, res, next) => {
   const auth = req.headers.authorization.split(" ");
   const jwt = auth[1];
   const data = toData(jwt);

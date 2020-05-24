@@ -7,7 +7,7 @@ const { Router } = require("express");
 const router = new Router();
 
 router.get("/events", (req, res) => {
-  const limit = req.query.limit || 12;
+  const limit = req.query.limit || 50;
   const offset = req.query.offset || 0;
   Event.findAndCountAll({ limit, offset }).then((result) => {
     res.json({
@@ -36,12 +36,13 @@ router.post("/events", (req, res, next) => {
   console.log(req.body);
   Event.create({
     ...req.body.eventData,
+    userId: req.body.userId,
   })
-    .then((data) => res.send(data))
+    .then((data) => res.json(data))
     .catch((error) => next(error));
 });
 
-router.put("/events/:eventID", auth, (req, res) => {
+router.put("/events/:eventID", (req, res) => {
   const event = {
     name: req.body.name,
     description: req.body.description,
