@@ -45,16 +45,12 @@ router.get("/tickets/:ticketID", (req, res) => {
 });
 
 router.post("/tickets", (req, res, next) => {
-  const auth = req.headers.authorization.split(" ");
-  const jwt = auth[1];
-  const data = toData(jwt);
-
   Ticket.create(
     {
-      picture: req.body.picture,
-      price: req.body.price,
-      description: req.body.description,
-      userId: data.userId,
+      picture: req.body.ticketData.picture,
+      price: req.body.ticketData.price,
+      description: req.body.ticketData.description,
+      userId: req.body.userId,
       eventId: req.body.eventId,
     },
     {
@@ -65,9 +61,7 @@ router.post("/tickets", (req, res, next) => {
       ],
     }
   )
-    .then((data) => {
-      res.send(data);
-    })
+    .then((data) => res.json(data))
     .catch((error) => next(error));
 });
 
